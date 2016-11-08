@@ -1,0 +1,10 @@
+[user]
+	email = binary@benary.org
+	name = benaryorg
+	signingkey = AB13D7F8
+[commit]
+	gpgsign = on
+[github]
+	user = benaryorg
+[pull]
+	rebase = true
