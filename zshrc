@@ -71,6 +71,10 @@ export NIX_REMOTE=daemon
 export VISUAL=$(which vi)
 export EDITOR=$(which vi)
 
+# for https://gist.github.com/b3096ead44fdd567225caec62f6fca93
+export SHOW_TERMINAL=$(which terminology)
+export SHOW_EXECFLAG="--exec"
+
 gnu && ulimit -v 16777216
 gnu && alias ls='ls --color -F'
 gnu && alias grep='grep --color'
