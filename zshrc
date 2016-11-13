@@ -3,11 +3,11 @@ SAVEHIST=1000000
 INC_APPEND_HISTORY=1000000
 HISTFILE=~/.histfile
 
-PLATFORM=$(uname -o)
+PLATFORM=$(uname -s)
 
 function gnu()
 {
-	[[ ${PLATFORM} =~ "GNU/.+" ]]
+	test ${PLATFORM} = "Linux"
 }
 
 function openbsd()
