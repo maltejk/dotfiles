@@ -26,7 +26,7 @@ set mouse=a clipboard=unnamedplus
 set nu background=dark hidden
 set foldmethod=indent foldlevel=9999 foldcolumn=3
 set iskeyword-=_ 
-set cryptmethod=blowfish2
+"set cryptmethod=blowfish2
 syntax on
 
 inoremap <C-@> <C-x><C-o>
