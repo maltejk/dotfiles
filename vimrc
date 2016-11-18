@@ -21,7 +21,8 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab textwidth=100
+set textwidth=100
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent
 set mouse=a clipboard=unnamedplus
 set nu background=dark hidden
 set foldmethod=indent foldlevel=9999 foldcolumn=3
