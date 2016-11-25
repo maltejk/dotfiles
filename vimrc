@@ -6,6 +6,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dag/vim2hs'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'eagletmt/neco-ghc'
+Plug 'eiiches/vim-rainbowbrackets'
 Plug 'jhradilek/vim-rng'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'mattn/gist-vim'
@@ -58,6 +59,11 @@ let g:syntastic_check_on_wq = 0
 
 au BufRead,BufNewFile *.asm set filetype=nasm
 au BufRead,BufNewFile *.nix set filetype=yaml
+
+let g:rainbowbrackets_enable_round_brackets = 1
+let g:rainbowbrackets_enable_curly_brackets = 1
+let g:rainbowbrackets_enable_square_brackets = 1
+let g:rainbowbrackets_enable_angle_brackets = 1
 
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
