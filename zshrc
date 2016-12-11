@@ -3,6 +3,8 @@ SAVEHIST=1000000
 INC_APPEND_HISTORY=1000000
 HISTFILE=~/.histfile
 
+source /etc/profile
+
 PLATFORM=$(uname -s)
 
 function gnu()
