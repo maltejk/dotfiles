@@ -26,6 +26,7 @@ set textwidth=100
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent
 set mouse=a clipboard=unnamedplus
 set nu background=dark hidden
+set ruler cursorline
 set foldmethod=indent foldlevel=9999 foldcolumn=3
 set iskeyword-=_ 
 "set cryptmethod=blowfish2
