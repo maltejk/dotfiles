@@ -86,7 +86,7 @@ gnu && alias cal='cal -m'
 bsd && alias ls='ls -F'
 
 alias xterm='xterm -bg black -fg white'
-alias xmpp='tmux -L xmpp a || tmux -L xmpp new-session -D profanity'
+alias xmpp='tmux -L xmpp a || tmux -L xmpp new-session -D irssi'
 alias sumux='sudo tmux new-session -c ~root'
 alias clip='xclip -in -selection clipboard'
 
