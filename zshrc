@@ -74,6 +74,11 @@ test -e ~/.nix-profile/etc/profile.d/nix.sh && source ~/.nix-profile/etc/profile
 export VISUAL=$(which vi)
 export EDITOR=$(which vi)
 
+source ~/.zsh/zplug/init.zsh
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+
 # for https://gist.github.com/b3096ead44fdd567225caec62f6fca93
 export SHOW_TERMINAL=$(which terminology)
 export SHOW_EXECFLAG="--exec"
@@ -89,4 +94,6 @@ alias xterm='xterm -bg black -fg white'
 alias xmpp='tmux -L xmpp a || tmux -L xmpp new-session -D irssi'
 alias sumux='sudo tmux new-session -c ~root'
 alias clip='xclip -in -selection clipboard'
+
+zplug load
 
