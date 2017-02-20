@@ -94,6 +94,8 @@ alias xterm="xterm -bg black -fg white"
 alias xmpp="tmux -L xmpp a || tmux -L xmpp new-session -D irssi"
 alias sumux="sudo tmux new-session -c ~root"
 alias clip="xclip -in -selection clipboard"
+alias mktemp="mktemp -p ${HOME}/.local/tmp"
+alias tmp="pushd \$(mktemp -d)"
 
 zplug load
 
