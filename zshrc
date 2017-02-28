@@ -88,7 +88,8 @@ gnu && alias ls='ls --color -F'
 gnu && alias grep='grep --color'
 gnu && alias cal='cal -m'
 
-bsd && alias ls='ls -F'
+freebsd && alias ls='ls -F'
+openbsd && test -e "$(which colorls)" && alias ls="$(which colorls) -FG"
 
 function openmux()
 {
