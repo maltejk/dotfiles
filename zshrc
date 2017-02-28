@@ -90,12 +90,24 @@ gnu && alias cal='cal -m'
 
 bsd && alias ls='ls -F'
 
+function openmux()
+{
+	test "${#}" -ge 1 || return 1
+
+	readonly name=${1}
+	shift
+
+	tmux -L "${name}" a \
+		|| tmux -L "${name}" new-session ${@}
+}
+
 alias xterm="xterm -bg black -fg white"
-alias xmpp="tmux -L xmpp a || tmux -L xmpp new-session -D irssi"
+alias xmpp="openmux -D irssi"
 alias sumux="sudo tmux new-session -c ~root"
 alias clip="xclip -in -selection clipboard"
 alias mktemp="mktemp -p ${HOME}/.local/tmp"
 alias tmp="pushd \$(mktemp -d)"
+alias work="openmux work"
 
 zplug load
 
