@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+git submodule init
+git submodule update
+
 pushd $(dirname ${0}) > /dev/null
 FILES=$(pwd -P)
 echo symlinking to ${FILES}
