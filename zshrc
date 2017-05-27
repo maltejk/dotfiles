@@ -109,6 +109,7 @@ alias clip="xclip -in -selection clipboard"
 alias mktemp="mktemp -p ${HOME}/.local/tmp"
 alias tmp="pushd \$(mktemp -d)"
 alias work="openmux work"
+alias note="cat > /dev/null"
 
 zplug load
 
