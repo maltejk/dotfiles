@@ -67,3 +67,31 @@ let g:rainbowbrackets_enable_angle_brackets = 1
 
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
+augroup gentoo
+	au!
+
+	au BufRead,BufNewFile *.e{build,class} let is_bash=1|setfiletype sh
+	au BufRead,BufNewFile *.e{build,class} set ts=4 sw=4 noexpandtab
+
+	autocmd BufNewFile,BufRead *.txt
+		\ if &tw == 0 && ! exists("g:leave_my_textwidth_alone") |
+		\     setlocal textwidth=78 |
+		\ endif
+
+	autocmd BufReadPost *
+		\ if ! exists("g:leave_my_cursor_position_alone") |
+		\     if line("'\"") > 0 && line ("'\"") <= line("$") |
+		\         exe "normal! g'\"" |
+		\     endif |
+		\ endif
+
+	autocmd FileType crontab set backupcopy=yes
+
+	autocmd BufReadPost *
+		\ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" && 
+		\    ! &bomb && search('[\x80-\xFF]','nw') == 0 && &modifiable |
+		\       set fileencoding= |
+		\ endif
+
+augroup END
+
