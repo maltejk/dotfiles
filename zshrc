@@ -102,6 +102,8 @@ function openmux()
 		|| tmux -L "${name}" new-session ${@}
 }
 
+gnu && export JUMPHOST="shell.cloud.bsocat.net"
+
 alias xterm="xterm -bg black -fg white"
 alias xmpp="openmux -D irssi"
 alias sumux="sudo tmux new-session -c ~root"
@@ -110,6 +112,7 @@ alias mktemp="mktemp -p ${HOME}/.local/tmp"
 alias tmp="pushd \$(mktemp -d)"
 alias work="openmux work"
 alias note="cat > /dev/null"
+alias j="ssh ${JUMPHOST}"
 
 zplug load
 
