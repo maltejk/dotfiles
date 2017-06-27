@@ -82,11 +82,6 @@ augroup gentoo
 	au BufRead,BufNewFile *.e{build,class} let is_bash=1|setfiletype sh
 	au BufRead,BufNewFile *.e{build,class} set ts=4 sw=4 noexpandtab
 
-	autocmd BufNewFile,BufRead *.txt
-		\ if &tw == 0 && ! exists("g:leave_my_textwidth_alone") |
-		\     setlocal textwidth=78 |
-		\ endif
-
 	autocmd BufReadPost *
 		\ if ! exists("g:leave_my_cursor_position_alone") |
 		\     if line("'\"") > 0 && line ("'\"") <= line("$") |
