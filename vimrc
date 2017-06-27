@@ -20,6 +20,7 @@ Plug 'scrooloose/syntastic'
 Plug 'rodjek/vim-puppet'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'dpc/vim-smarttabs'
 call plug#end()
 
 set textwidth=100
