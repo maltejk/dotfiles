@@ -32,6 +32,11 @@ function bsd()
 	openbsd || freebsd || netbsd
 }
 
+function darwin()
+{
+	test ${PLATFORM} = "Darwin"
+}
+
 for mod in compinit compaudit promptinit colors;do
 	autoload -U ${mod}
 	${mod}
