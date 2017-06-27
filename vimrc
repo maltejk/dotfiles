@@ -22,7 +22,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
 set textwidth=100
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
 set mouse=a clipboard=unnamedplus
 set nu background=dark hidden
 set ruler cursorline
