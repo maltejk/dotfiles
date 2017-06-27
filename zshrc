@@ -88,14 +88,6 @@ zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 export SHOW_TERMINAL=$(which terminology)
 export SHOW_EXECFLAG="--exec"
 
-gnu && ulimit -v 16777216
-gnu && alias ls='ls --color -F'
-gnu && alias grep='grep --color'
-gnu && alias cal='cal -m'
-
-freebsd && alias ls='ls -F'
-openbsd && test -e "$(which colorls)" && alias ls="$(which colorls) -FG"
-
 function openmux()
 {
 	test "${#}" -ge 1 || return 1
@@ -107,7 +99,25 @@ function openmux()
 		|| tmux -L "${name}" new-session ${@}
 }
 
-gnu && export JUMPHOST="shell.cloud.bsocat.net"
+darwin && export JUMPHOST="jumpblu"
+! darwin && export JUMPHOST="shell.cloud.bsocat.net"
+
+gnu && alias ls='ls --color -F'
+bsd && alias ls='ls -F'
+darwin && alias ls='ls -FG'
+
+gnu && ulimit -v 16777216
+gnu && alias grep='grep --color'
+gnu && alias cal='cal -m'
+
+freebsd && alias ls='ls -F'
+openbsd && test -e "$(which colorls)" && alias ls="$(which colorls) -FG"
+
+darwin && alias clip='pbcopy'
+! darwin && alias clip='xclip -in -selection clipboard'
+
+darwin && alias j="ssh -t ${JUMPHOST} -- \"bash -c \\\"tmux -L tmux a || tmux -L tmux new-session -D bash\\\"\""
+! darwin && alias j="ssh -t ${JUMPHOST}"
 
 alias xterm="xterm -bg black -fg white"
 alias xmpp="openmux -D profanity"
@@ -117,7 +127,6 @@ alias mktemp="mktemp -p ${HOME}/.local/tmp"
 alias tmp="cd \$(mktemp -d)"
 alias work="openmux work"
 alias note="cat > /dev/null"
-alias j="ssh ${JUMPHOST}"
 
 zplug load
 
