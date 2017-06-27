@@ -68,6 +68,12 @@ let g:rainbowbrackets_enable_curly_brackets = 1
 let g:rainbowbrackets_enable_square_brackets = 1
 let g:rainbowbrackets_enable_angle_brackets = 1
 
+augroup vimrc-rainbowbrackets
+	autocmd!
+	autocmd FileType haskell let b:rainbowbrackets_enable_angle_brackets = 0
+	autocmd FileType haskell let b:rainbowbrackets_enable_curly_brackets = 0
+augroup END
+
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 augroup gentoo
