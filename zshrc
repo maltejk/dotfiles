@@ -105,7 +105,7 @@ function openmux()
 gnu && export JUMPHOST="shell.cloud.bsocat.net"
 
 alias xterm="xterm -bg black -fg white"
-alias xmpp="openmux -D irssi"
+alias xmpp="openmux -D profanity"
 alias sumux="sudo tmux new-session -c ~root"
 alias clip="xclip -in -selection clipboard"
 alias mktemp="mktemp -p ${HOME}/.local/tmp"
