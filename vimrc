@@ -17,6 +17,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'rodjek/vim-puppet'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
@@ -59,6 +60,7 @@ let g:syntastic_check_on_wq = 0
 
 au BufRead,BufNewFile *.asm set filetype=nasm
 au BufRead,BufNewFile *.nix set filetype=yaml
+au BufRead,BufNewFile *.pp  set filetype=puppet
 
 let g:rainbowbrackets_enable_round_brackets = 1
 let g:rainbowbrackets_enable_curly_brackets = 1
