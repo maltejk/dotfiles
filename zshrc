@@ -79,11 +79,6 @@ export PATH=~/.local/sbin:~/.local/bin:~/.nix-profile/bin:~/.cargo/bin/:/usr/gam
 export VISUAL=$(which vi)
 export EDITOR=$(which vi)
 
-source ~/.zsh/zplug/init.zsh
-
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-
 # for https://gist.github.com/b3096ead44fdd567225caec62f6fca93
 export SHOW_TERMINAL=$(which terminology)
 export SHOW_EXECFLAG="--exec"
@@ -128,5 +123,5 @@ alias tmp="cd \$(mktemp -d)"
 alias work="openmux work"
 alias note="cat > /dev/null"
 
-zplug load
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
