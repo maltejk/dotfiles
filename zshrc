@@ -9,22 +9,22 @@ PLATFORM=$(uname -s)
 
 function gnu()
 {
-	test ${PLATFORM} = "Linux"
+	test "${PLATFORM}" = "Linux"
 }
 
 function openbsd()
 {
-	test ${PLATFORM} = "OpenBSD"
+	test "${PLATFORM}" = "OpenBSD"
 }
 
 function freebsd()
 {
-	test ${PLATFORM} = "FreeBSD"
+	test "${PLATFORM}" = "FreeBSD"
 }
 
 function netbsd()
 {
-	test ${PLATFORM} = "NetBSD"
+	test "${PLATFORM}" = "NetBSD"
 }
 
 function bsd()
@@ -34,12 +34,12 @@ function bsd()
 
 function darwin()
 {
-	test ${PLATFORM} = "Darwin"
+	test "${PLATFORM}" = "Darwin"
 }
 
 for mod in compinit compaudit promptinit colors;do
-	autoload -U ${mod}
-	${mod}
+	autoload -U "${mod}"
+	"${mod}"
 done
 
 bindkey -v
@@ -56,7 +56,7 @@ bindkey -M vicmd "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey -M vicmd "^[[3~" delete-char
 
-if [ $UID = 0 ];then
+if test "${UID}" -eq 0;then
 	PROMPT='%B%F{red}%m%k %B%F{blue}%1~ %# %b%f%k'
 else
 	PROMPT='%B%F{green}%n@%m%k %B%F{blue}%~ %# %b%f%k'
@@ -75,24 +75,24 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 #export NIX_REMOTE=daemon
 test -e ~/.nix-profile/etc/profile.d/nix.sh && source ~/.nix-profile/etc/profile.d/nix.sh
-export PATH=~/.local/sbin:~/.local/bin:~/.nix-profile/bin:~/.cargo/bin/:/usr/games/:/usr/games/bin/:$PATH
+export PATH="${HOME}/.local/sbin:${HOME}/.local/bin:${HOME}/.nix-profile/bin:${HOME}/.cargo/bin/:/usr/games/:/usr/games/bin/:${PATH}"
 
-export VISUAL=$(which vi)
-export EDITOR=$(which vi)
+export VISUAL="$(which vi)"
+export EDITOR="$(which vi)"
 
 # for https://gist.github.com/b3096ead44fdd567225caec62f6fca93
-export SHOW_TERMINAL=$(which terminology)
+export SHOW_TERMINAL="$(which terminology)"
 export SHOW_EXECFLAG="--exec"
 
 function openmux()
 {
 	test "${#}" -ge 1 || return 1
 
-	readonly name=${1}
+	readonly name="${1}"
 	shift
 
 	tmux -L "${name}" a \
-		|| tmux -L "${name}" new-session ${@}
+		|| tmux -L "${name}" new-session "${@}"
 }
 
 darwin && export JUMPHOST="jumpblu"
