@@ -1,0 +1,22 @@
+!! Appearance
+URxvt.termName: xterm
+URxvt.scrollBar: false
+URxvt.background: black
+URxvt.foreground: gray
+
+!! Font preferences
+URxvt.font: xft:DejaVu Sans Mono:size=11
+URxvt.letterSpace: -1
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+!! Larger history limit
+URxvt.saveLines: 1000000
+
+!! tmux clipboard
+XTerm*disallowedWindowOps: 20,21,SetXprop
+! needs http://anti.teamidiot.de/static/nei/*/Code/urxvt/osc-xterm-clipboard
+! backup: https://gist.github.com/benaryorg/b5a362b105bd75b25c8390191f3d9c31
+URxvt.perl-ext-common: default,osc-xterm-clipboard
+
