@@ -118,7 +118,7 @@ darwin && alias j="ssh -t ${JUMPHOST} -- \"bash -c \\\"tmux -L tmux a || tmux -L
 openbsd && alias sudo="doas"
 
 alias xterm="xterm -bg black -fg white"
-alias xmpp="openmux -D profanity"
+alias xmpp="openmux xmpp profanity"
 alias sumux="sudo tmux new-session -c ~root"
 alias clip="xsel -b"
 alias mktemp="mktemp -p ${HOME}/.local/tmp"
