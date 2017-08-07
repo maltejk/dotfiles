@@ -91,8 +91,8 @@ function openmux()
 	readonly name="${1}"
 	shift
 
-	tmux -L "${name}" a \
-		|| tmux -L "${name}" new-session "${@}"
+	tmux attach-session -t "${name}" \
+		|| tmux new-session -s "${name}" "${@}"
 }
 
 darwin && export JUMPHOST="jumpblu"
