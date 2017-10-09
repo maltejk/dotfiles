@@ -14,5 +14,5 @@ ls "${FILES}" \
 			&& ln -s "${FILES}/${line}" "${HOME}/.${line}"
 	done
 
-vim +PlugInstall
+vim +PlugInstall +PlugUpdate +q +q
 
