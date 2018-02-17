@@ -69,7 +69,7 @@ au BufRead,BufNewFile *.pp  set filetype=puppet
 let g:rainbowbrackets_enable_round_brackets = 1
 let g:rainbowbrackets_enable_curly_brackets = 1
 let g:rainbowbrackets_enable_square_brackets = 1
-let g:rainbowbrackets_enable_angle_brackets = 1
+let g:rainbowbrackets_enable_angle_brackets = 0
 
 augroup vimrc-rainbowbrackets
 	autocmd!
