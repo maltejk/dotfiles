@@ -33,6 +33,9 @@ set iskeyword-=_
 "set cryptmethod=blowfish2
 syntax on
 
+" don't override that. seriously
+filetype plugin indent off
+
 inoremap <C-@> <C-x><C-o>
 
 let $RUST_SRC_PATH="/usr/local/src/rust/src/"
