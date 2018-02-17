@@ -12,3 +12,5 @@
 	prune = true
 [grep]
 	extendedRegexp = true
+[alias]
+	p = ! git pull && git push
