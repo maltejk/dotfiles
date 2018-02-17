@@ -1,4 +1,6 @@
 call plug#begin('~/.vim/plugged')
+Plug 'coot/CRDispatcher'
+Plug 'coot/EnchantedVim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -23,6 +25,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'dpc/vim-smarttabs'
 call plug#end()
 
+set magic
 set textwidth=100
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
 set mouse=a clipboard=unnamedplus
