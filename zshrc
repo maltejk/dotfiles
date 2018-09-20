@@ -82,6 +82,20 @@ export EDITOR="$(which vi)"
 export SHOW_TERMINAL="$(which terminology)"
 export SHOW_EXECFLAG="--exec"
 
+function lxcrunit()
+{
+	local image="${1:-images:alpine/edge}"
+
+	lxc exec \
+		"$(
+			lxc launch -e ${image} 2> /dev/null \
+				| perl -ne "m{^Starting (.+)\$} && print \"\$1\\n\"" \
+				| head -n 1
+		)" \
+		-- \
+		sh -c "su -l;halt || su -l"
+}
+
 function openmux()
 {
 	test "${#}" -ge 1 || return 1
