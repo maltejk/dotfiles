@@ -5,6 +5,8 @@ SAVEHIST=1000000000
 INC_APPEND_HISTORY=1000000000
 HISTFILE=~/.histfile
 
+TIMEFMT+=" max RSS %M"
+
 test -r /etc/profile && source /etc/profile
 
 PLATFORM=$(uname -s)
