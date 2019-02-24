@@ -99,7 +99,7 @@ augroup gentoo
 	autocmd FileType crontab set backupcopy=yes
 
 	autocmd BufReadPost *
-		\ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" && 
+		\ if exists("g:added_fenc_utf8") && &fileencoding == "utf-8" &&
 		\    ! &bomb && search('[\x80-\xFF]','nw') == 0 && &modifiable |
 		\       set fileencoding= |
 		\ endif
