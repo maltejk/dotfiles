@@ -1,40 +1,40 @@
+" https://github.com/junegunn/vim-plug/blob/master
 call plug#begin('~/.vim/plugged')
-Plug 'coot/CRDispatcher'
-Plug 'coot/EnchantedVim'
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" https://github.com/airblade/vim-gitgutter
 Plug 'airblade/vim-gitgutter'
-Plug 'dag/vim2hs'
+" https://github.com/dhruvasagar/vim-table-mode
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'eagletmt/neco-ghc'
+" https://github.com/eiiches/vim-rainbowbrackets
 Plug 'eiiches/vim-rainbowbrackets'
-Plug 'jhradilek/vim-rng'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'racer-rust/vim-racer'
-Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
-Plug 'rodjek/vim-puppet'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" https://github.com/vim-syntastic/syntastic
+Plug 'vim-syntastic/syntastic'
+" https://github.com/dpc/vim-smarttabs
 Plug 'dpc/vim-smarttabs'
+" https://github.com/NLKNguyen/papercolor-theme
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
+
+
+set t_Co=256
+colorscheme PaperColor
+
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
 
 set magic
 set textwidth=100
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
-set mouse=a clipboard=unnamedplus
-set nu background=dark hidden
+set number background=light laststatus=2
+set clipboard=unnamedplus
 set hlsearch
 set ruler cursorline
 set foldmethod=indent foldlevel=9999 foldcolumn=3
 set iskeyword-=_ 
-"set cryptmethod=blowfish2
 syntax on
 
 " don't override that. seriously
@@ -42,20 +42,9 @@ filetype plugin indent off
 
 inoremap <C-@> <C-x><C-o>
 
-let $RUST_SRC_PATH="/usr/local/src/rust/src/"
-let g:neocomplete_enable_at_startup = 1
-
-let g:haskellmode_completion_ghc = 0
-let g:haskell_conceal = 0
-let g:haskell_conceal_enumerations = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-"let g:table_mode_corner_corner = '+'
-"let g:table_mode_header_fillchar = '='
+let g:table_mode_corner_corner = '+'
+let g:table_mode_header_fillchar = '='
 let g:table_mode_corner="|"
-
-let g:pandoc#formatting#mode = "h"
-let g:pandoc#spell#enabled = 0
 
 set laststatus=2
 set statusline+=%#warningmsg#
@@ -80,8 +69,6 @@ augroup vimrc-rainbowbrackets
 	autocmd FileType haskell let b:rainbowbrackets_enable_angle_brackets = 0
 	autocmd FileType haskell let b:rainbowbrackets_enable_curly_brackets = 0
 augroup END
-
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 augroup gentoo
 	au!
