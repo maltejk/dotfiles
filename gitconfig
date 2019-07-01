@@ -1,11 +1,6 @@
 [user]
-	email = binary@benary.org
-	name = benaryorg
-	signingkey = 666854374A5D88437FA46B447A06724E5B00E546
-[commit]
-	gpgsign = on
-[github]
-	user = benaryorg
+    name = Malte Jan Kaffenberger
+    email = m.kaffenberger@syseleven.d
 [pull]
 	rebase = true
 [fetch]
