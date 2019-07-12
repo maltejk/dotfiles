@@ -27,14 +27,18 @@ let g:PaperColor_Theme_Options = {
   \ }
 
 set magic
-set textwidth=100
+" set textwidth=100
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
 set number background=light laststatus=2
 set clipboard=unnamedplus
 set hlsearch
 set ruler cursorline
 set foldmethod=indent foldlevel=9999 foldcolumn=3
-set iskeyword-=_ 
+set iskeyword-=_
+
+set listchars=tab:→\ ,nbsp:␣,trail:•,precedes:«,extends:»
+set list
+
 syntax on
 
 " don't override that. seriously
@@ -64,12 +68,6 @@ let g:rainbowbrackets_enable_curly_brackets = 1
 let g:rainbowbrackets_enable_square_brackets = 1
 let g:rainbowbrackets_enable_angle_brackets = 0
 
-augroup vimrc-rainbowbrackets
-	autocmd!
-	autocmd FileType haskell let b:rainbowbrackets_enable_angle_brackets = 0
-	autocmd FileType haskell let b:rainbowbrackets_enable_curly_brackets = 0
-augroup END
-
 augroup gentoo
 	au!
 
@@ -90,6 +88,7 @@ augroup gentoo
 		\    ! &bomb && search('[\x80-\xFF]','nw') == 0 && &modifiable |
 		\       set fileencoding= |
 		\ endif
-
 augroup END
 
+let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(400,999),",")
