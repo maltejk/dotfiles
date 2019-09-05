@@ -10,6 +10,8 @@ Plug 'eiiches/vim-rainbowbrackets'
 Plug 'vim-syntastic/syntastic'
 " https://github.com/dpc/vim-smarttabs
 Plug 'dpc/vim-smarttabs'
+" https://github.com/itchyny/lightline.vim
+Plug 'itchyny/lightline.vim'
 " https://github.com/NLKNguyen/papercolor-theme
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
@@ -25,6 +27,13 @@ let g:PaperColor_Theme_Options = {
   \     }
   \   }
   \ }
+
+let g:lightline = {
+  \ 'colorscheme': 'PaperColor_light',
+  \ }
+set noshowmode  " to get rid of thing like --INSERT--
+set noshowcmd  " to get rid of display of last command
+set laststatus=1
 
 set magic
 " set textwidth=100
