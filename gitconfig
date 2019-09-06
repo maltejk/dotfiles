@@ -1,6 +1,6 @@
 [user]
-    name = Malte Jan Kaffenberger
-    email = malte@maltejk.de
+	name = Malte Jan Kaffenberger
+	email = malte@maltejk.de
 [pull]
 	rebase = true
 [fetch]
@@ -9,3 +9,10 @@
 	extendedRegexp = true
 [alias]
 	p = ! git pull && git push
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesfile = ~/.gitignore
