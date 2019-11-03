@@ -16,7 +16,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
-
 set t_Co=256
 colorscheme PaperColor
 
