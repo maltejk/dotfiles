@@ -16,3 +16,5 @@
 	required = true
 [core]
 	excludesfile = ~/.gitignore
+[diff]
+	noprefix = true
