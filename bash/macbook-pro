@@ -1,0 +1,18 @@
+# vim: filetype=sh
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+#    eval `ssh-agent -s`
+#    ssh-add
+#fi
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+alias ssh-add='/usr/bin/ssh-add'
+
+alias mosh='mosh --port=60000 --server=/home/linuxbrew/.linuxbrew/bin/mosh-server'
+
