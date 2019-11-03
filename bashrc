@@ -131,4 +131,4 @@ alias scp-noverify='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking
 
 export PS1='[\t] \u@\h:\w\$ '
 
-source "$HOME/bashrc.d/$(hostname -s)" || true
+source "$HOME/.bashrc.d/$(hostname -s)" || true
