@@ -1,0 +1,49 @@
+# vim: filetype=sh
+
+export SSH_AUTH_SOCK=${HOME}/.ssh/.ssh-auth.sock
+pidof ssh-agent >/dev/null || test -z "$SSH_AUTH_SOCK" && eval $(ssh-agent -a $SSH_AUTH_SOCK)
+
+source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+
+source "$HOME/.bashrc.d/kube-ps1-extended.sh"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM="auto"
+
+export KUBE_PS1_PREFIX=" ("
+export KUBE_PS1_SYMBOL_ENABLE=false
+export KUBE_PS1_CTX_COLOR="black"
+export KUBE_PS1_NS_COLOR="black"
+
+#prompt with git info and k8s foo
+
+export PS1='[\t] \u@\h:\w$(kube_ps1)$(__git_ps1 " (%s) ")\$ '
+#export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "$(kube_ps1) \\\$ "'
+
+kubesetup () {
+  KUBECONFIG_FILE=$HOME/.kube/config-${1}
+  if [ -f $KUBECONFIG_FILE ]; then
+    source <(kubectl completion bash)
+    complete -F __start_kubectl k
+    export KUBECONFIG="$KUBECONFIG_FILE"
+    echo "loaded cluster config ${1}"
+  else
+    echo "please chose a cluster:"
+    ( cd $HOME/.kube; ls config-* | sed 's/config-/- /g' )
+  fi
+  unset KUBECONFIG_FILE
+}
+
+kubeca () {
+  KUBECONFIG_FILE=$HOME/.kube/config-${1}
+  echo "printing ca for $KUBECONFIG_FILE"
+  grep 'certificate-authority-data:' $KUBECONFIG_FILE | cut -d ':' -f 2 | tail -c +2 | base64 -d
+}
+
+kubeserver () {
+  KUBECONFIG_FILE=$HOME/.kube/config-${1}
+  echo "printing server for $KUBECONFIG_FILE"
+  grep 'server:' $KUBECONFIG_FILE | cut -d ':' -f 2- | tail -c +2
+}
+
