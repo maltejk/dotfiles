@@ -129,4 +129,6 @@ export HISTFILESIZE=""
 alias ssh-noverify='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias scp-noverify='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
+export PS1='[\t] \u@\h:\w\$ '
+
 source "$HOME/bashrc.d/$(hostname -s)" || true
