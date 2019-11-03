@@ -19,6 +19,8 @@ call plug#end()
 set t_Co=256
 colorscheme PaperColor
 
+set backspace=indent,eol,start
+
 let g:PaperColor_Theme_Options = {
   \   'theme': {
   \     'default': {
