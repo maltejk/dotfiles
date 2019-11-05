@@ -16,11 +16,11 @@ Plug 'itchyny/lightline.vim'
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
+set backspace=indent,eol,start
+set splitright
+
 set t_Co=256
 colorscheme PaperColor
-
-set backspace=indent,eol,start
-
 let g:PaperColor_Theme_Options = {
   \   'theme': {
   \     'default': {
