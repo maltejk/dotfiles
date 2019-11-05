@@ -47,3 +47,4 @@ kubeserver () {
   grep 'server:' $KUBECONFIG_FILE | cut -d ':' -f 2- | tail -c +2
 }
 
+alias assh='ansible-ssh'
