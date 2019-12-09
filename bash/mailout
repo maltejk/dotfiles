@@ -58,5 +58,5 @@ dockersetup () {
   eval $(docker-machine env docker)
 }
 
-alias pdnsutil='ssh a.dns.mjk.me "sudo pdnsutil"'
+alias pdnsutil='ssh -t a.dns.mjk.me "sudo pdnsutil"'
 
