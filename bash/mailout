@@ -3,6 +3,8 @@
 export SSH_AUTH_SOCK=${HOME}/.ssh/.ssh-auth.sock
 pidof ssh-agent >/dev/null || test -z "$SSH_AUTH_SOCK" && eval $(ssh-agent -a $SSH_AUTH_SOCK)
 
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
 source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
 
 source "$HOME/.bashrc.d/kube-ps1-extended.sh"
@@ -47,4 +49,14 @@ kubeserver () {
   grep 'server:' $KUBECONFIG_FILE | cut -d ':' -f 2- | tail -c +2
 }
 
+alias k='kubectl'
+alias kns='kubens'
+
 alias assh='ansible-ssh'
+
+dockersetup () {
+  eval $(docker-machine env docker)
+}
+
+alias pdnsutil='ssh a.dns.mjk.me "sudo pdnsutil"'
+
