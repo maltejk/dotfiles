@@ -19,6 +19,8 @@ call plug#end()
 set backspace=indent,eol,start
 set splitright
 
+set cursorcolumn
+
 set t_Co=256
 colorscheme PaperColor
 let g:PaperColor_Theme_Options = {
