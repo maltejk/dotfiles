@@ -14,6 +14,8 @@ Plug 'dpc/vim-smarttabs'
 Plug 'itchyny/lightline.vim'
 " https://github.com/NLKNguyen/papercolor-theme
 Plug 'NLKNguyen/papercolor-theme'
+" https://github.com/stevearc/vim-arduino
+Plug 'stevearc/vim-arduino'
 call plug#end()
 
 set backspace=indent,eol,start
