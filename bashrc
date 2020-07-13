@@ -112,7 +112,7 @@ fi
 #  fi
 #fi
 
-export PATH=$HOME/.local/bin:$HOME/.local/sbin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.local/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # https://blog.jonaspasche.com/index.html%3Fp=1297.html
 # read this number of lines into history buffer on startup
