@@ -56,8 +56,12 @@ alias assh='ansible-ssh'
 alias ascp='ansible-scp'
 
 dockeron () {
-  ssh 192.168.178.110 "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
-  eval $(docker-machine env docker)
+  if [ -z "$1" ]; then
+    ssh 192.168.178.110 "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
+    eval $(docker-machine env docker)
+  else
+    eval $(docker-machine env "$1")
+  fi
 }
 
 dockeroff () {
