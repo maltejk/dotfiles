@@ -16,6 +16,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'NLKNguyen/papercolor-theme'
 " https://github.com/stevearc/vim-arduino
 Plug 'stevearc/vim-arduino'
+" https://vimawesome.com/plugin/vim-ansible-yaml
+Plug 'chase/vim-ansible-yaml'
 call plug#end()
 
 set backspace=indent,eol,start
@@ -26,16 +28,17 @@ set cursorcolumn
 set t_Co=256
 colorscheme PaperColor
 let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }
+	\   'theme': {
+		\     'default': {
+			\       'transparent_background': 1
+				\     }
+		\   }
+	\ }
 
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor_light',
-  \ }
+	\ 'colorscheme': 'PaperColor_light',
+	\ }
+
 set noshowmode  " to get rid of thing like --INSERT--
 set noshowcmd  " to get rid of display of last command
 set laststatus=1
@@ -70,8 +73,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_ansible_checkers = ['ansible_lint']
 
 au BufRead,BufNewFile *.asm set filetype=nasm
 au BufRead,BufNewFile *.nix set filetype=yaml
@@ -106,3 +111,4 @@ augroup END
 
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
+
