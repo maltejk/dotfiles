@@ -47,7 +47,7 @@ set magic
 " set textwidth=100
 set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
 set number background=light laststatus=2
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 set hlsearch
 set ruler cursorline
 set foldmethod=indent foldlevel=9999 foldcolumn=3
@@ -55,6 +55,8 @@ set iskeyword-=_
 
 set listchars=tab:→\ ,nbsp:␣,trail:•,precedes:«,extends:»
 set list
+
+au VimLeave * :!clear
 
 syntax on
 
