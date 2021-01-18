@@ -18,6 +18,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'stevearc/vim-arduino'
 " https://vimawesome.com/plugin/vim-ansible-yaml
 Plug 'chase/vim-ansible-yaml'
+" https://github.com/hashivim/vim-terraform
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set backspace=indent,eol,start
@@ -113,4 +115,15 @@ augroup END
 
 let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(400,999),",")
+
+set modeline
+set modelines=5
+
+" set the undo directory and disable swap files
+set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undofile
+set backup
+set swapfile
 
