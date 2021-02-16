@@ -20,6 +20,10 @@ Plug 'stevearc/vim-arduino'
 Plug 'chase/vim-ansible-yaml'
 " https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
+" https://github.com/mustache/vim-mustache-handlebars
+Plug 'mustache/vim-mustache-handlebars'
+" https://github.com/tpope/vim-vinegar
+Plug 'tpope/vim-vinegar'
 call plug#end()
 
 set backspace=indent,eol,start
