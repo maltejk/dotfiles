@@ -24,6 +24,10 @@ Plug 'hashivim/vim-terraform'
 Plug 'mustache/vim-mustache-handlebars'
 " https://github.com/tpope/vim-vinegar
 Plug 'tpope/vim-vinegar'
+" airline
+"Plug 'vim-airline/vim-airline'
+" nerdtree
+"Plug 'scrooloose/nerdtree'
 call plug#end()
 
 set backspace=indent,eol,start
@@ -51,7 +55,7 @@ set laststatus=1
 
 set magic
 " set textwidth=100
-set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent copyindent
+set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab autoindent copyindent
 set number background=light laststatus=2
 set clipboard^=unnamed,unnamedplus
 set hlsearch
@@ -130,4 +134,39 @@ set directory=~/.vim/swap//
 set undofile
 set backup
 set swapfile
+
+""""""" nerdtree configuration """""""
+" open nerdtree with ctrl+n
+map <C-n> :NERDTreeToggle<CR>
+" open nerdtree if no file was specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" close vim automatically if nerdtree is the last open window
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" close nerdtree after opening a file
+let NERDTreeQuitOnOpen = 0
+" automatically delete buffer when deleting a file with nerdtree
+let NERDTreeAutoDeleteBuffer = 1
+" show hidden files by default
+let NERDTreeShowHidden=1
+" change default arrows
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
+""""""" nerdtree git configuration """""""
+" hide brackets around symbols
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+" custom symbols
+"let g:NERDTreeGitStatusIndicatorMapCustom = {
+            "\ 'Modified'  :'✹',
+            "\ 'Staged'    :'✚',
+            "\ 'Untracked' :'✭',
+            "\ 'Renamed'   :'➜',
+            "\ 'Unmerged'  :'═',
+            "\ 'Deleted'   :'✖',
+            "\ 'Dirty'     :'✗',
+            "\ 'Ignored'   :'☒',
+            "\ 'Clean'     :'✔︎',
+            "\ 'Unknown'   :'?',
+            "\ }
 
