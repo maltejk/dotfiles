@@ -15,102 +15,9 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-#if ! shopt -oq posix; then
-#  if [ -f /usr/share/bash-completion/bash_completion ]; then
-#    . /usr/share/bash-completion/bash_completion
-#  elif [ -f /etc/bash_completion ]; then
-#    . /etc/bash_completion
-#  fi
-#fi
 
 export PATH=$HOME/.local/bin:$HOME/.local/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
@@ -126,6 +33,15 @@ export HISTSIZE=10000
 #unset HISTFILESIZE
 export HISTFILESIZE=""
 
+# get brew --prefix faster
+case "$(uname -s )" in
+  "Darwin")
+    BREW_PREFIX="/usr/local"
+    ;;
+  "Linux")
+    BREW_PREFIX="/home/linuxbrew/.linuxbrew"
+esac
+
 # get it from here
 # https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 source "$HOME/.bashrc.d/git-prompt.sh"
@@ -134,33 +50,44 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM="auto"
 
-source "$HOME/.bashrc.d/kube-ps1-extended.sh"
-
+# brew install kube-ps1
 export KUBE_PS1_PREFIX=" ("
 export KUBE_PS1_SYMBOL_ENABLE=false
 export KUBE_PS1_CTX_COLOR="black"
 export KUBE_PS1_NS_COLOR="black"
 
-#prompt with git info and k8s foo
+# don't throw error below if not in kubesetup() context
+kube_ps1 () {
+  true
+}
 
+#prompt with git info and k8s foo
 export PS1='[\t] \u@\h:\w$(kube_ps1)$(__git_ps1 " (%s) ")\$ '
 #export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "$(kube_ps1) \\\$ "'
 
 kubesetup () {
   KUBECONFIG_FILE=$HOME/.kube/config-${1}
   if [ -f $KUBECONFIG_FILE ]; then
-    source <(kubectl completion bash)
-    complete -F __start_kubectl k
-    export KUBECONFIG="$KUBECONFIG_FILE"
-    echo "loaded cluster config ${1}"
+    printf "loaded cluster config" ${1}
   else
-    echo "please chose a cluster:"
-    ( cd $HOME/.kube; ls config-* | sed 's/config-/- /g' )
+    printf "available clusters: "
+    (
+      cd $HOME/.kube
+      ( ls config-* 2>/dev/null || echo "none" ) | tr "\n" ' ' | sed 's/config-/- /g'
+    )
+    printf "\nnone chosen, using default\n"
+    KUBECONFIG_FILE=$HOME/.kube/config
   fi
+  source <(kubectl completion bash)
+  complete -F __start_kubectl k
+  export KUBECONFIG="$KUBECONFIG_FILE"
+  source "$BREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh"
+  # remove ALL the emojis
+  source "$HOME/.bashrc.d/kube-ps1-extended.sh"
   unset KUBECONFIG_FILE
 }
 
-alias helm1='/home/linuxbrew/.linuxbrew/opt/helm@2/bin/helm'
+alias helm2='/home/linuxbrew/.linuxbrew/opt/helm@2/bin/helm'
 
 alias k='kubectl'
 alias kns='kubens'
