@@ -126,9 +126,46 @@ export HISTSIZE=10000
 #unset HISTFILESIZE
 export HISTFILESIZE=""
 
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM="auto"
+
+source "$HOME/.bashrc.d/kube-ps1-extended.sh"
+
+export KUBE_PS1_PREFIX=" ("
+export KUBE_PS1_SYMBOL_ENABLE=false
+export KUBE_PS1_CTX_COLOR="black"
+export KUBE_PS1_NS_COLOR="black"
+
+#prompt with git info and k8s foo
+
+export PS1='[\t] \u@\h:\w$(kube_ps1)$(__git_ps1 " (%s) ")\$ '
+#export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "$(kube_ps1) \\\$ "'
+
+kubesetup () {
+  KUBECONFIG_FILE=$HOME/.kube/config-${1}
+  if [ -f $KUBECONFIG_FILE ]; then
+    source <(kubectl completion bash)
+    complete -F __start_kubectl k
+    export KUBECONFIG="$KUBECONFIG_FILE"
+    echo "loaded cluster config ${1}"
+  else
+    echo "please chose a cluster:"
+    ( cd $HOME/.kube; ls config-* | sed 's/config-/- /g' )
+  fi
+  unset KUBECONFIG_FILE
+}
+
+alias helm1='/home/linuxbrew/.linuxbrew/opt/helm@2/bin/helm'
+
+alias k='kubectl'
+alias kns='kubens'
+
 alias ssh-noverify='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias scp-noverify='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
-export PS1='[\t] \u@\h:\w\$ '
+alias assh='ansible-ssh'
+alias ascp='ansible-scp'
 
 source "$HOME/.bashrc.d/$(hostname -s)" || true
+
