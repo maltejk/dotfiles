@@ -1,6 +1,6 @@
 # vim: filetype=sh
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+source /usr/local/opt/git/share/zsh/site-functions/git-completion.bash
 
 #if [ -z "$SSH_AUTH_SOCK" ] ; then
 #    eval `ssh-agent -s`
