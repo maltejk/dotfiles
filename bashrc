@@ -126,6 +126,10 @@ export HISTSIZE=10000
 #unset HISTFILESIZE
 export HISTFILESIZE=""
 
+# get it from here
+# https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+source "$HOME/.bashrc.d/git-prompt.sh"
+
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM="auto"
