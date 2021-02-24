@@ -98,5 +98,11 @@ alias scp-noverify='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking
 alias assh='ansible-ssh'
 alias ascp='ansible-scp'
 
+kssh () {
+  ssh root@$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)
+}
+
+export PS1='[\t] \u@\h:\w\$ '
+
 source "$HOME/.bashrc.d/$(hostname -s)" || true
 
