@@ -32,6 +32,7 @@ call plug#end()
 
 set backspace=indent,eol,start
 set splitright
+set splitbelow
 
 set cursorcolumn
 
