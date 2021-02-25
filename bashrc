@@ -67,7 +67,7 @@ esac
 # HOMEBREW_PREFIX=/usr/local
 # HOMEBREW_CELLAR=/usr/local/Cellar
 # HOMEBREW_REPOSITORY=/usr/local/Homebrew
-source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+#source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 # get it from here
 # https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
