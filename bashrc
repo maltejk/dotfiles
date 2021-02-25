@@ -95,7 +95,7 @@ export PS1='[\t] \u@\h:\w$(kube_ps1)$(__git_ps1 " (%s) ")\$ '
 kubesetup () {
   KUBECONFIG_FILE=$HOME/.kube/config-${1}
   if [ -f $KUBECONFIG_FILE ]; then
-    printf "loaded cluster config" ${1}
+    printf "loaded cluster config %s\n" ${1}
   else
     printf "available clusters: "
     (
