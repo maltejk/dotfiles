@@ -34,8 +34,19 @@ export HISTSIZE=10000
 #unset HISTFILESIZE
 export HISTFILESIZE=""
 
-# set environment
-eval $(brew shellenv)
+# load (home|linux)brew
+case "$(uname -s )" in
+  "Darwin")
+    eval $(brew shellenv)
+    # use system's ssh-add for keychain functionality
+    alias ssh-add='/usr/bin/ssh-add'
+    ;;
+  "Linux")
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    ;;
+esac
+
+# on macOS
 # env | grep BREW
 # HOMEBREW_PREFIX=/usr/local
 # HOMEBREW_CELLAR=/usr/local/Cellar
@@ -81,13 +92,13 @@ kubesetup () {
   source <(kubectl completion bash)
   complete -F __start_kubectl k
   export KUBECONFIG="$KUBECONFIG_FILE"
-  source "$BREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh"
+  source "$HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh"
   # remove ALL the emojis
   source "$HOME/.bashrc.d/kube-ps1-extended.sh"
   unset KUBECONFIG_FILE
 }
 
-alias helm2='/home/linuxbrew/.linuxbrew/opt/helm@2/bin/helm'
+alias helm2='$HOMEBREW_PREFIX/opt/helm@2/bin/helm'
 
 alias k='kubectl'
 alias kns='kubens'
@@ -101,12 +112,5 @@ alias ascp='ansible-scp'
 kssh () {
   ssh root@$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)
 }
-
-# use system's ssh-add for keychain functionality
-case "$(uname -s )" in
-  "Darwin")
-    alias ssh-add='/usr/bin/ssh-add'
-    ;;
-esac
 
 source "$HOME/.bashrc.d/$(hostname -s)" || true

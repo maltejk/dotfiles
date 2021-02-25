@@ -3,10 +3,6 @@
 export SSH_AUTH_SOCK=${HOME}/.ssh/.ssh-auth.sock
 pidof ssh-agent >/dev/null || eval $(ssh-agent -a $SSH_AUTH_SOCK)
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
-
 dockeron () {
   if [ -z "$1" ]; then
     ssh 192.168.178.110 "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
