@@ -1,6 +1,5 @@
-[user]
-	name = Malte Jan Kaffenberger
-	email = malte@maltejk.de
+[include]
+	path = ~/gitconfig.local
 [pull]
 	rebase = true
 [fetch]
