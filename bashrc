@@ -1,3 +1,4 @@
+# vim: filetype=sh
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -33,14 +34,13 @@ export HISTSIZE=10000
 #unset HISTFILESIZE
 export HISTFILESIZE=""
 
-# get brew --prefix faster
-case "$(uname -s )" in
-  "Darwin")
-    BREW_PREFIX="/usr/local"
-    ;;
-  "Linux")
-    BREW_PREFIX="/home/linuxbrew/.linuxbrew"
-esac
+# set environment
+eval $(brew shellenv)
+# env | grep BREW
+# HOMEBREW_PREFIX=/usr/local
+# HOMEBREW_CELLAR=/usr/local/Cellar
+# HOMEBREW_REPOSITORY=/usr/local/Homebrew
+source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 # get it from here
 # https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
@@ -102,7 +102,11 @@ kssh () {
   ssh root@$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)
 }
 
-export PS1='[\t] \u@\h:\w\$ '
+# use system's ssh-add for keychain functionality
+case "$(uname -s )" in
+  "Darwin")
+    alias ssh-add='/usr/bin/ssh-add'
+    ;;
+esac
 
 source "$HOME/.bashrc.d/$(hostname -s)" || true
-

@@ -10,7 +10,5 @@ source /usr/local/opt/git/share/zsh/site-functions/git-completion.bash
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-alias ssh-add='/usr/bin/ssh-add'
-
 alias mosh='mosh --port=60000 --server=/home/linuxbrew/.linuxbrew/bin/mosh-server'
 
