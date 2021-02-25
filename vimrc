@@ -30,12 +30,6 @@ Plug 'tpope/vim-vinegar'
 "Plug 'scrooloose/nerdtree'
 call plug#end()
 
-set backspace=indent,eol,start
-set splitright
-set splitbelow
-
-set cursorcolumn
-
 set t_Co=256
 colorscheme PaperColor
 let g:PaperColor_Theme_Options = {
@@ -49,6 +43,12 @@ let g:PaperColor_Theme_Options = {
 let g:lightline = {
 	\ 'colorscheme': 'PaperColor_light',
 	\ }
+
+set backspace=indent,eol,start
+set splitright
+set splitbelow
+
+set cursorcolumn
 
 set noshowmode  " to get rid of thing like --INSERT--
 set noshowcmd  " to get rid of display of last command
