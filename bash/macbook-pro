@@ -1,12 +1,5 @@
 # vim: filetype=sh
 
-source /usr/local/opt/git/share/zsh/site-functions/git-completion.bash
-
-#if [ -z "$SSH_AUTH_SOCK" ] ; then
-#    eval `ssh-agent -s`
-#    ssh-add
-#fi
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
