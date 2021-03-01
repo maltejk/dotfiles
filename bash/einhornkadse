@@ -1,20 +1,14 @@
 # vim: filetype=sh
 # kill macOS ssh-agent, daemon can't be disabled due to SIP
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  DEBUG=true
   __ssh_agent_pids=$(pidof ssh-agent)
   __ssh_agent_pid_amount=$(printf "%s" "$__ssh_agent_pids" | wc -w)
   __ssh_agent_pid_amount=${__ssh_agent_pid_amount// /}
   if [[ "$__ssh_agent_pids_amount" -gt 0 ]]; then
     for pid in $__ssh_agent_pids; do
-      $DEBUG && printf "Found PID %s," $pid
       if [[ "$(ps -p ${pid} -o command=)" == "/usr/bin/ssh-agent -l" ]]; then
-        $DEBUG && printf " seems to be system's ssh-agent, killing it."
         kill ${pid}
-      else
-        $DEBUG && printf " doing nothing."
       fi
-      $DEBUG && printf "\n"
     done
     unset $pid
   fi
