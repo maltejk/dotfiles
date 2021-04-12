@@ -23,5 +23,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 source $HOME/.awsconfig
 
+alias aws-azure-login='docker run --rm -it -e AZURE_TENANT_ID="$AZURE_TENANT_ID" -e AZURE_DEFAULT_USERNAME="$AZURE_DEFAULT_USERNAME" -e AZURE_DEFAULT_DURATION_HOURS="$AZURE_DEFAULT_DURATION_HOURS" -v ~/.aws:/root sportradar/aws-azure-login --no-prompt'
+
 #. "/usr/local/opt/asdf/asdf.sh"
 #. "/usr/local/opt/asdf/etc/bash_completion.d/asdf.bash"
