@@ -129,4 +129,6 @@ kssh () {
   ssh root@$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)
 }
 
+alias :q='exit'
+
 source "$HOME/.bashrc.d/$(hostname -s)" || true
