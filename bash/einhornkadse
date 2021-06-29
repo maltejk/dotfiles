@@ -21,3 +21,39 @@ fi
 
 export PATH=$HOME/.local/bin:$PATH
 
+asdf-setup () {
+  . $(brew --prefix asdf)/asdf.sh
+  . $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+}
+
+asdf-install-plugins () {
+  (
+    __asdf-install-plugins
+  )
+}
+__asdf-install-plugins () {
+  if [ ! -f .tool-versions ]; then
+    echo ".tool-versions file not found!"
+    exit 1
+  fi
+
+  awk '{print $1}' .tool-versions | while read -r plugin; do
+    if asdf plugin-list | grep "$plugin"; then
+      echo "$plugin is already installed. Skipping"
+    else
+      echo "Installing $plugin"
+      asdf plugin add "$plugin"
+      ex=$?
+      if [ $ex -eq 2 ] || [ $ex -eq 0 ]; then
+        echo "Successfully installed $plugin"
+      else
+        echo "Error installing $plugin"
+        exit $ex
+      fi
+
+      if [ "$plugin" = "nodejs" ]; then
+        bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+      fi
+    fi
+  done
+}
