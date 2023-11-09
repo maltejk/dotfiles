@@ -17,3 +17,20 @@
 	excludesfile = ~/.gitignore
 [diff]
 	noprefix = true
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[safe]
+	directory = /home/maltejk/Developer/gre-keepalive/bcc
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
+	directory = /home/maltejk/Developer/gre-keepalive/bcc
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
+	directory = /home/maltejk/Developer/gre-keepalive/bcc
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
+	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
