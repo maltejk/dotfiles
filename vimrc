@@ -34,15 +34,28 @@ set t_Co=256
 colorscheme PaperColor
 let g:PaperColor_Theme_Options = {
 	\   'theme': {
-		\     'default': {
-			\       'transparent_background': 1
-				\     }
-		\   }
+	\     'default': {
+	\       'transparent_background': 1
+	\     }
+	\   }
 	\ }
 
 let g:lightline = {
 	\ 'colorscheme': 'PaperColor_light',
 	\ }
+
+let g:rainbowbrackets_colors =
+	\ [
+	\   'ctermfg=9',
+	\   'ctermfg=10',
+	\   'ctermfg=33',
+	\   'ctermfg=14'
+	\ ]
+
+let g:rainbowbrackets_enable_round_brackets = 1
+let g:rainbowbrackets_enable_curly_brackets = 1
+let g:rainbowbrackets_enable_square_brackets = 1
+let g:rainbowbrackets_enable_angle_brackets = 0
 
 set backspace=indent,eol,start
 set splitright
@@ -95,11 +108,6 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 au BufRead,BufNewFile *.nix set filetype=yaml
 au BufRead,BufNewFile *.pp  set filetype=puppet
 
-let g:rainbowbrackets_enable_round_brackets = 1
-let g:rainbowbrackets_enable_curly_brackets = 1
-let g:rainbowbrackets_enable_square_brackets = 1
-let g:rainbowbrackets_enable_angle_brackets = 0
-
 augroup gentoo
 	au!
 
@@ -122,8 +130,8 @@ augroup gentoo
 		\ endif
 augroup END
 
-let &colorcolumn=join(range(81,999),",")
-let &colorcolumn="80,".join(range(400,999),",")
+"let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn="80,".join(range(400,999),",")
 
 set modeline
 set modelines=5
