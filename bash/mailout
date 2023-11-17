@@ -5,7 +5,7 @@ pidof ssh-agent >/dev/null || eval $(ssh-agent -a $SSH_AUTH_SOCK)
 
 dockeron () {
   if [ -z "$1" ]; then
-    ssh root@nas "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
+    lxc info nunas:docker | grep -i running > /dev/null || lxc start nunas:docker
     eval $(docker-machine env docker)
   else
     eval $(docker-machine env "$1")
@@ -21,7 +21,7 @@ dockerenv () {
 }
 
 dockeroff () {
-  ssh root@nas "export PATH=/snap/bin:$PATH; lxc info docker | grep Running && ( echo 'Stopping docker lxc'; lxc stop docker )"
+    lxc info nunas:docker | grep -i running > /dev/null || lxc stop nunas:docker
 }
 
 alias pdnsutil='ssh -t a.dns.mjk.me "sudo pdnsutil"'
