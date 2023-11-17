@@ -93,6 +93,7 @@ export PS1='[\t] \u@\h:\w$(kube_ps1)$(__git_ps1 " (%s) ")\$ '
 #export PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "$(kube_ps1) \\\$ "'
 
 kubesetup () {
+  which kubectl > /dev/null || ( echo "no kubectl available, exiting."; exit 1 )
   KUBECONFIG_FILE=$HOME/.kube/config-${1}
   if [ -f $KUBECONFIG_FILE ]; then
     printf "loaded cluster config %s\n" ${1}
@@ -121,14 +122,91 @@ alias kns='kubens'
 
 alias ssh-noverify='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias scp-noverify='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias sftp-noverify='sftp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
-alias assh='ansible-ssh'
-alias ascp='ansible-scp'
-
-kssh () {
-  ssh root@$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)
-}
+which assh > /dev/null || alias assh='ansible-ssh'
+which ascp > /dev/null || alias ascp='ansible-scp'
 
 alias :q='exit'
 
+kssh () {
+  if ( ! command -v kubectl  > /dev/null ); then
+    echo "no kubectl available, exiting."
+    exit 1
+  fi
+  if [ -z "$KUBECONFIG" ]]; then
+    echo "trying with unset \$KUBECONFIG."
+  fi
+  local nodeip="$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)"
+  if [ -z "$nodeip" ]; then
+    echo "not able to get node's ip address, exiting."
+    exit 1
+  fi
+  ssh root@$nodeip
+}
+
+kping () {
+  if ( ! command -v kubectl  > /dev/null ); then
+    echo "no kubectl available, exiting."
+    exit 1
+  fi
+  if [ -z "$KUBECONFIG" ]]; then
+    echo "trying with unset \$KUBECONFIG."
+  fi
+  local nodeip="$(kubectl get node -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}' $1)"
+  if [ -z "$nodeip" ]; then
+    echo "not able to get node's ip address, exiting."
+    exit 1
+  fi
+  ping $nodeip
+}
+
+awsregion() {
+  if [[ -z $1 ]]; then
+    PS3="Please choose an option "
+    select option in $(aws ec2 describe-regions --query "Regions[].RegionName" --output text --region us-east-1)
+    do
+      export AWS_DEFAULT_REGION=$option
+      export AWS_REGION=$option
+      break;
+    done
+  else
+    export AWS_DEFAULT_REGION=$1
+    export AWS_REGION=$1
+  fi
+}
+
+_awsregion() {
+  if [ $COMP_CWORD -eq 1 ]; then
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "eu-west-1 eu-central-1 us-east-1 us-east-2 us-west-1 us-west-2 sa-east-1" -- $cur) )
+  fi
+}
+
+complete -F _awsregion awsregion
+
+awsprofile() {
+  if [[ -z $1 ]]; then
+    echo "missing profile name"
+  else
+    export AWS_DEFAULT_PROFILE=$1
+    export AWS_PROFILE=$1
+  fi
+}
+
+_awsprofile_list() {
+  cat ~/.aws/config | grep "\[profile" | sed "s/\[profile \(.*\)\]/\1/"
+}
+
+_awsprofile() {
+  if [ $COMP_CWORD -eq 1 ]; then
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "$(_awsprofile_list)" -- $cur) )
+  fi
+}
+
+complete -F _awsprofile awsprofile
+
 source "$HOME/.bashrc.d/$(hostname -s)" || true
+
+export LC_ALL=en_US.UTF-8

@@ -5,7 +5,15 @@ pidof ssh-agent >/dev/null || eval $(ssh-agent -a $SSH_AUTH_SOCK)
 
 dockeron () {
   if [ -z "$1" ]; then
-    ssh 192.168.178.110 "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
+    ssh root@nas "export PATH=/snap/bin:$PATH; lxc info docker | grep Running || ( echo 'Starting docker lxc'; lxc start docker )"
+    eval $(docker-machine env docker)
+  else
+    eval $(docker-machine env "$1")
+  fi
+}
+
+dockerenv () {
+  if [ -z "$1" ]; then
     eval $(docker-machine env docker)
   else
     eval $(docker-machine env "$1")
@@ -13,8 +21,33 @@ dockeron () {
 }
 
 dockeroff () {
-  ssh 192.168.178.110 "export PATH=/snap/bin:$PATH; lxc info docker | grep Running && ( echo 'Stopping docker lxc'; lxc stop docker )"
+  ssh root@nas "export PATH=/snap/bin:$PATH; lxc info docker | grep Running && ( echo 'Stopping docker lxc'; lxc stop docker )"
 }
 
 alias pdnsutil='ssh -t a.dns.mjk.me "sudo pdnsutil"'
 
+gosetup () {
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$PATH
+}
+
+brewoff() {
+  local prefix="$HOMEBREW_PREFIX"
+  local path_result
+  local manpath_result
+  local infopath_result
+
+  # Clean PATH
+  path_result=$(echo "$PATH" | awk -v prefix="$prefix" 'BEGIN { RS=":"; ORS=":" } !($0 ~ prefix "/(s?bin)$")')
+
+  # Clean MANPATH
+  manpath_result=$(echo "$MANPATH" | awk -v prefix="$prefix/share/man" 'BEGIN { RS=":"; ORS=":" } !($0 ~ "^" prefix "/")')
+
+  # Clean INFOPATH
+  infopath_result=$(echo "$INFOPATH" | awk -v prefix="$prefix/share/info" 'BEGIN { RS=":"; ORS=":" } !($0 ~ "^" prefix "/")')
+
+  # Export the changed variables
+  declare -x PATH="$path_result"
+  declare -x MANPATH="$manpath_result"
+  declare -x INFOPATH="$infopath_result"
+}
