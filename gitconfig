@@ -21,16 +21,13 @@
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
-[safe]
-	directory = /home/maltejk/Developer/gre-keepalive/bcc
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
-	directory = /home/maltejk/Developer/gre-keepalive/bcc
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
-	directory = /home/maltejk/Developer/gre-keepalive/bcc
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/blazesym
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/src/cc/libbpf
-	directory = /home/maltejk/Developer/gre-keepalive/bcc/libbpf-tools/bpftool
+[gpg]
+	format = ssh
+[user]
+	signingkey = /Users/maltejk/.ssh/id_ed25519
+[commit]
+	gpgsign = true
+[advice]
+	skippedCherryPicks = false
+[tag]
+	gpgsign = true
